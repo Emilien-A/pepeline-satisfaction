@@ -1,0 +1,240 @@
+/* Variables globales */
+:root {
+  /* Couleurs iOS */
+  --primary: #007AFF;
+  --primary-hover: #0063CC;
+  --success: #34C759;
+  --danger: #FF3B30;
+  --text: #FFFFFF;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --bg: #000000;
+  
+  /* Effets iOS */
+  --blur: blur(20px);
+  --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  /* Opacités iOS */
+  --overlay: rgba(0, 0, 0, 0.4);
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-hover: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-active: rgba(255, 255, 255, 0.2);
+  
+  /* Layout */
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --padding-mobile: 1rem;
+  --padding-desktop: 1.5rem;
+  --max-width: 1200px;
+}
+
+/* Reset et styles de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: url('/background.png') no-repeat center center fixed;
+  background-size: cover;
+  color: var(--text);
+  min-height: 100vh;
+  position: relative;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+/* Overlay global avec effet iOS */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: var(--overlay);
+  z-index: 0;
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+}
+
+/* Conteneurs principaux */
+.app, 
+.container,
+.prediction-container,
+.evaluation-container,
+.results-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Effet verre iOS */
+.glass {
+  background: var(--glass);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+/* Application de l'effet verre */
+.form-container,
+.form-wrapper,
+.results-card {
+  @extend .glass;
+  padding: var(--padding-desktop);
+}
+
+/* Boutons style iOS */
+button {
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 0.8rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  background: var(--glass);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+button:active {
+  transform: scale(0.98);
+  background: var(--glass-active);
+}
+
+/* Boutons primaires iOS */
+.primary,
+.nav-btn.primary,
+.start-button,
+.home-btn {
+  background: var(--primary);
+  border: none;
+}
+
+.primary:hover,
+.nav-btn.primary:hover,
+.start-button:hover,
+.home-btn:hover {
+  background: var(--primary-hover);
+}
+
+/* Champs de saisie iOS */
+input {
+  width: 100%;
+  padding: 1rem;
+  color: var(--text);
+  font-size: 1rem;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--glass-hover);
+  box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
+}
+
+/* Style des étoiles */
+.star-btn {
+  font-size: 1.5rem;
+  padding: 0.3rem;
+  border-radius: var(--radius-full);
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+}
+
+.star-btn.active {
+  color: #FFD60A;
+  text-shadow: 0 0 20px rgba(255, 214, 10, 0.5);
+}
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--padding-desktop);
+}
+
+/* Titres style iOS */
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Animation iOS */
+@keyframes fadeIn {
+  from { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  :root {
+    --blur: blur(10px);
+  }
+  
+  .container {
+    padding: var(--padding-mobile);
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .form-container,
+  .form-wrapper,
+  .results-card {
+    padding: var(--padding-mobile);
+  }
+  
+  /* Optimisations tactiles pour mobile */
+  button {
+    padding: 1rem;
+    min-height: 44px; /* Norme iOS pour la zone tactile */
+  }
+  
+  input {
+    font-size: 16px; /* Évite le zoom sur iOS */
+    min-height: 44px;
+  }
+} 

@@ -1,0 +1,34 @@
+# Dépendances
+node_modules
+package-lock.json
+
+# Fichiers de build
+.nuxt
+dist
+.output
+
+# Fichiers locaux
+.env
+.env.*
+!.env.example
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Système
+.DS_Store
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Cache
+.cache
+.temp
