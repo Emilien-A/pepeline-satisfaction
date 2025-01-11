@@ -37,9 +37,11 @@
         <!-- Saisie de l'âge -->
         <div class="space-y-2">
           <AgeInput
+            id="age"
             v-model="profile.age"
+            label="Âge"
             :error="ageError"
-            @update:error="updateAgeError"
+            @error="updateAgeError"
           />
         </div>
 

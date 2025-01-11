@@ -112,13 +112,13 @@ const router = useRouter()
 // Options de classe de vol
 const flightClasses = [
   { value: 'business' as FlightClass, label: 'Business' },
-  { value: 'eco' as FlightClass, label: 'Éco' },
-  { value: 'eco_plus' as FlightClass, label: 'Éco+' }
+  { value: 'eco_plus' as FlightClass, label: 'Eco+' },
+  { value: 'eco' as FlightClass, label: 'Eco' }
 ]
 
 // État local du formulaire
-const flight = ref<FlightDetails>(store.flight || {
-  class: 'eco',
+const flight = ref<FlightDetails>({
+  class: null,
   distance: null,
   departureDelay: null,
   arrivalDelay: null
@@ -130,7 +130,7 @@ const departureDelayError = ref('')
 const arrivalDelayError = ref('')
 
 // Sélection de la classe de vol
-function selectClass(value: FlightClass) {
+const selectClass = (value: FlightClass) => {
   flight.value.class = value
 }
 

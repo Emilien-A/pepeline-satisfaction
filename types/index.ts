@@ -1,39 +1,36 @@
 // Types pour le profil utilisateur
+export type Gender = 'male' | 'female'
+export type TravelerType = 'regular' | 'occasional'
+export type TravelPurpose = 'business' | 'leisure'
+export type FlightClass = 'business' | 'eco_plus' | 'eco'
+
 export interface UserProfile {
-  gender: 'male' | 'female'
+  gender: Gender | null
   age: number | null
-  type: 'ponctuel' | 'regulier'
-  purpose: 'travail' | 'personnel'
+  type: TravelerType | null
+  purpose: TravelPurpose | null
 }
 
 // Types pour les détails du vol
 export interface FlightDetails {
-  class: 'business' | 'eco' | 'eco+'
-  departureDelay: number
-  arrivalDelay: number
+  class: FlightClass | null
   distance: number | null
+  departureDelay: number | null
+  arrivalDelay: number | null
 }
 
 // Types pour les évaluations
 export interface ServiceRatings {
-  wifi: number
-  schedule: number
-  booking: number
-  food: number
-  boarding: number
-  comfort: number
-  entertainment: number
-  service: number
-  legroom: number
-  baggage: number
-  checkin: number
-  crew: number
-  cleanliness: number
+  wifi: number | null
+  food: number | null
+  entertainment: number | null
 }
 
 // Type pour le store complet
 export interface PassengerState {
-  profile: UserProfile
-  flight: FlightDetails
-  ratings: ServiceRatings
+  hasStartedForm: boolean
+  currentStep: number
+  profile: UserProfile | null
+  flight: FlightDetails | null
+  ratings: ServiceRatings | null
 } 

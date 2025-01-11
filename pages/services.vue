@@ -83,12 +83,10 @@ const store = usePassengerStore()
 const router = useRouter()
 
 // État local pour les notations et les directions de swipe
-const ratings = ref<ServiceRatings>(store.ratings || {
-  wifi: 0,
-  food: 0,
-  entertainment: 0,
-  comfort: 0,
-  crew: 0
+const ratings = ref<ServiceRatings>({
+  wifi: null,
+  food: null,
+  entertainment: null
 })
 const swipeDirections = ref<Record<string, string>>({})
 
@@ -165,11 +163,9 @@ function getServiceTitle(id: string): string {
 
 // Soumission des notations et navigation vers la page de succès
 const submitRatings = () => {
-  if (areAllServicesRated.value) {
-    store.updateRating(ratings.value);
-    navigateTo('/success');
-  }
-};
+  store.updateRating(ratings.value)
+  navigateTo('/success')
+}
 </script>
 
 <style scoped>
