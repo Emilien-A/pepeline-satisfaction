@@ -57,7 +57,7 @@
               class="px-4 py-2 rounded-ios text-center transition-all duration-300
                      hover:bg-ios-blue hover:text-white active:scale-[0.98]"
               :class="[
-                profile.travelerType === option.value
+                profile.type === option.value
                   ? 'bg-ios-blue text-white'
                   : 'bg-ios-card text-ios-text'
               ]"
@@ -82,7 +82,7 @@
               class="px-4 py-2 rounded-ios text-center transition-all duration-300
                      hover:bg-ios-blue hover:text-white active:scale-[0.98]"
               :class="[
-                profile.travelPurpose === option.value
+                profile.purpose === option.value
                   ? 'bg-ios-blue text-white'
                   : 'bg-ios-card text-ios-text'
               ]"
@@ -137,12 +137,12 @@ const travelPurposes = [
 ]
 
 // État local du formulaire
-const profile = ref<UserProfile>(store.profile || {
+const profile = ref<UserProfile>({
   gender: null,
   age: null,
-  travelerType: null,
-  travelPurpose: null
-})
+  type: null,
+  purpose: null
+} as unknown as UserProfile)
 
 // État d'erreur pour l'âge
 const ageError = ref('')
@@ -153,11 +153,11 @@ function selectGender(value: Gender) {
 }
 
 function selectTravelerType(value: TravelerType) {
-  profile.value.travelerType = value
+  profile.value.type = value
 }
 
 function selectTravelPurpose(value: TravelPurpose) {
-  profile.value.travelPurpose = value
+  profile.value.purpose = value
 }
 
 // Mise à jour de l'erreur d'âge
@@ -170,19 +170,22 @@ const isFormValid = computed(() => {
   return (
     profile.value.gender !== null &&
     profile.value.age !== null &&
-    profile.value.travelerType !== null &&
-    profile.value.travelPurpose !== null &&
+    profile.value.type !== null &&
+    profile.value.purpose !== null &&
     !ageError.value
   )
 })
 
 // Soumission du formulaire
-async function submitProfile() {
-  if (isFormValid.value) {
-    await store.updateProfile(profile.value)
-    router.push('/flight')
-  }
-}
+const submitProfile = () => {
+  store.updateProfile({
+    gender: profile.value.gender,
+    age: profile.value.age,
+    type: profile.value.type,
+    purpose: profile.value.purpose
+  });
+  navigateTo('/flight');
+};
 </script>
 
 <style scoped>

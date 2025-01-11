@@ -164,12 +164,12 @@ function getServiceTitle(id: string): string {
 }
 
 // Soumission des notations et navigation vers la page de succès
-async function submitRatings() {
+const submitRatings = () => {
   if (areAllServicesRated.value) {
-    await store.updateRatings(ratings.value)
-    router.push('/success')
+    store.updateRating(ratings.value);
+    navigateTo('/success');
   }
-}
+};
 </script>
 
 <style scoped>
